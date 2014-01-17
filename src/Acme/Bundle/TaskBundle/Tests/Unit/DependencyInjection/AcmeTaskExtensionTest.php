@@ -1,8 +1,10 @@
 <?php
 
-namespace OroAcme\Bundle\TodoListBundle\Tests\Unit\DependencyInjection;
+namespace Acme\Bundle\TaskBundle\Tests\Unit\DependencyInjection;
 
 use Acme\Bundle\TaskBundle\DependencyInjection\AcmeTaskExtension;
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class AcmeTaskExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,20 +14,29 @@ class AcmeTaskExtensionTest extends \PHPUnit_Framework_TestCase
     protected $extension;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var ContainerBuilder
      */
     protected $container;
 
     protected function setUp()
     {
-        $this->container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')->getMock();
-
+        $this->container = new ContainerBuilder();
         $this->extension = new AcmeTaskExtension();
     }
 
-    public function testLoad()
+    /**
+     * @dataProvider loadParameterDataProvider
+     */
+    public function testLoadParameters($parameter)
     {
-        $this->container->expects($this->never())->method($this->anything());
         $this->extension->load(array(), $this->container);
+        $this->assertTrue($this->container->hasParameter($parameter));
+    }
+
+    public function loadParameterDataProvider()
+    {
+        return array(
+            'acme_task.entity.class' => array('acme_task.entity.class')
+        );
     }
 }

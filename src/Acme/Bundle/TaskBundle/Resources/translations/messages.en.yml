@@ -1,0 +1,10 @@
+acme:
+    task:
+        title.label: Title
+        description.label: Description
+        status.label: Status
+        assignee.label: Assignee
+        owner.label: Owner
+        relatedContact.label: Related Contact
+        created_at.label: Created At
+        updated_at.label: Updated At
