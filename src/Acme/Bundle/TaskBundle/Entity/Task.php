@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
 use OroCRM\Bundle\ContactBundle\Entity\Contact;
+
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+
 use Oro\Bundle\UserBundle\Entity\User;
 
 use Acme\Bundle\TaskBundle\Model\ExtendTask;
@@ -18,6 +21,18 @@ use Acme\Bundle\TaskBundle\Model\ExtendTask;
  * })
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Acme\Bundle\TaskBundle\Entity\Repository\TaskRepository")
+ * @Config(
+ *  defaultValues={
+ *      "ownership"={
+ *          "owner_type"="USER",
+ *          "owner_field_name"="owner",
+ *          "owner_column_name"="owner_id"
+ *      },
+ *      "security"={
+ *          "type"="ACL"
+ *      }
+ *  }
+ * )
  */
 class Task extends ExtendTask
 {

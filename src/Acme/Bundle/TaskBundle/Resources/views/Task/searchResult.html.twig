@@ -23,5 +23,9 @@
 
 {% macro renderUserValue(user) %}
     {{ user|oro_format_name }} -
-    <a href="{{ path('oro_user_view', {id: user.id}) }}">{{ user.username }}</a>
+    {% if resource_granted('VIEW', user) %}
+        <a href="{{ path('oro_user_view', {id: user.id}) }}">{{ user.username }}</a>
+    {% else %}
+        ({{ user.username }})
+    {% endif %}
 {% endmacro %}

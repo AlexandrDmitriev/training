@@ -99,8 +99,10 @@ datagrid:
                 icon: user
                 link: view_link
                 rowAction: true
+                acl_resource:  acme_task_view
             update:
                 type: navigate
                 label: acme.task.datagrid.update_action.label
                 icon: edit
                 link: update_link
+                acl_resource:  acme_task_update

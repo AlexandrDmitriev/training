@@ -8,7 +8,9 @@
 {% set formAction = entityId ? path('acme_task_update', { 'id': entityId}) : path('acme_task_create') %}
 
 {% block navButtons %}
-    {{ UI.saveAndStayButton() }}
+    {% if resource_granted('acme_task_update') %}
+        {{ UI.saveAndStayButton() }}
+    {% endif %}
     {{ UI.saveAndCloseButton() }}
 {% endblock navButtons %}
 

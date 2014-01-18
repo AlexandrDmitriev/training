@@ -4,10 +4,12 @@
 {% oro_title_set({params : {"%entity.title%": entity.title }}) %}
 
 {% block navButtons %}
-    {{ UI.editButton({
-        'path' : path('acme_task_update', { id: entity.id }),
-        'entity_label': 'acme.task.entity_label'|trans
-    }) }}
+    {% if resource_granted('EDIT', entity) %}
+        {{ UI.editButton({
+            'path' : path('acme_task_update', { id: entity.id }),
+            'entity_label': 'acme.task.entity_label'|trans
+        }) }}
+    {% endif %}
 {% endblock navButtons %}
 
 {% block pageHeader %}
@@ -52,17 +54,25 @@
     {{ parent() }}
 {% endblock content_data %}
 
+
 {% macro renderUser(entity) %}
     {% if entity %}
         {{ entity|oro_format_name }} -
-        <a href="{{ path('oro_user_view', {'id': entity.id}) }}">{{ entity }}</a>
+        {% if resource_granted('VIEW', entity) %}
+            <a href="{{ path('oro_user_view', {'id': entity.id}) }}">{{ entity }}</a>
+        {% else %}
+            {{ entity }}
+        {% endif %}
     {% endif %}
 {% endmacro %}
 
 {% macro renderContact(entity) %}
     {% if entity %}
-        <a href="{{ path('orocrm_contact_view', {'id': entity.id}) }}">{{ entity|oro_format_name }}</a>
+        {%- if resource_granted('VIEW', entity) -%}
+            <a href="{{ path('orocrm_contact_view', {'id': entity.id}) }}">{{ entity|oro_format_name }}</a>
+        {%- else -%}
+            {{ entity|oro_format_name }}
+        {%- endif -%}
     {% endif %}
 {% endmacro %}
-
 
