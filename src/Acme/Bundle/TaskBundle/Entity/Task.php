@@ -61,7 +61,8 @@ class Task extends ExtendTask
      * @JMS\Type("string")
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      */
@@ -74,7 +75,8 @@ class Task extends ExtendTask
      * @Oro\Versioned
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      * @JMS\Type("string")
@@ -95,7 +97,8 @@ class Task extends ExtendTask
      * @JMS\Accessor(getter="getRelatedContactId")
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      */
@@ -111,7 +114,8 @@ class Task extends ExtendTask
      * @JMS\Accessor(getter="getStatusName")
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      */
@@ -127,7 +131,8 @@ class Task extends ExtendTask
      * @JMS\Accessor(getter="getAssigneeId")
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      */
@@ -143,7 +148,8 @@ class Task extends ExtendTask
      * @JMS\Accessor(getter="getOwnerId")
      * @ConfigField(
      *  defaultValues={
-     *      "dataaudit"={"auditable"=true}
+     *      "dataaudit"={"auditable"=true},
+     *      "email"={"available_in_template"=true}
      *  }
      * )
      */
@@ -154,6 +160,10 @@ class Task extends ExtendTask
      *
      * @ORM\Column(type="datetime")
      * @JMS\Type("DateTime")
+     * @ConfigField(
+     *  defaultValues={
+     *      "email"={"available_in_template"=true}
+     *  }
      * )
      */
     protected $createdAt;
@@ -163,6 +173,11 @@ class Task extends ExtendTask
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @JMS\Type("DateTime")
+     * @ConfigField(
+     *  defaultValues={
+     *      "email"={"available_in_template"=true}
+     *  }
+     * )
      */
     protected $updatedAt;
 
