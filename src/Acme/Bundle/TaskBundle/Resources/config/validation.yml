@@ -1,0 +1,6 @@
+Acme\Bundle\TaskBundle\Entity\Task:
+    properties:
+        title:
+            - NotBlank: ~
+        status:
+            - NotBlank: ~

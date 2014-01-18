@@ -1,0 +1,66 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% block navButtons %}
+    {{ UI.editButton({
+        'path' : path('acme_task_update', { id: entity.id }),
+        'entity_label': 'acme.task.entity_label'|trans
+    }) }}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('acme_task_index'),
+        'indexLabel': 'acme.task.entity_plural_label'|trans,
+        'entityTitle': entity.title
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {%- set taskInformation -%}
+        <div class="row-fluid form-horizontal">
+            <div class="responsive-block">
+                {{ UI.renderProperty('acme.task.status.label'|trans, entity.status) }}
+                {{ UI.renderProperty('acme.task.title.label'|trans, entity.title) }}
+                {{ UI.renderProperty('acme.task.description.label'|trans, entity.description) }}
+                {{ UI.renderProperty('acme.task.relatedContact.label'|trans, _self.renderContact(entity.relatedContact)) }}
+                {{ UI.renderProperty('acme.task.assignee.label'|trans, _self.renderUser(entity.assignee)) }}
+                {{ UI.renderProperty('acme.task.owner.label'|trans, _self.renderUser(entity.owner)) }}
+                {{ UI.renderProperty('acme.task.created_at.label'|trans, entity.createdAt|oro_format_datetime) }}
+                {{ UI.renderProperty('acme.task.updated_at.label'|trans, entity.updatedAt|oro_format_datetime) }}
+            </div>
+        </div>
+    {%- endset -%}
+
+    {% set dataBlocks = [
+        {
+            'title': 'acme.task.block.general'|trans,
+            'class': 'active',
+            'subblocks': [
+                {'data' : [taskInformation]}
+            ]
+        }
+    ] %}
+
+    {% set id = 'userView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+
+    {{ parent() }}
+{% endblock content_data %}
+
+{% macro renderUser(entity) %}
+    {% if entity %}
+        {{ entity|oro_format_name }} -
+        <a href="{{ path('oro_user_view', {'id': entity.id}) }}">{{ entity }}</a>
+    {% endif %}
+{% endmacro %}
+
+{% macro renderContact(entity) %}
+    {% if entity %}
+        <a href="{{ path('orocrm_contact_view', {'id': entity.id}) }}">{{ entity|oro_format_name }}</a>
+    {% endif %}
+{% endmacro %}
+
+

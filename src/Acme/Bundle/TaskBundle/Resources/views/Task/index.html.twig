@@ -2,3 +2,10 @@
 {% import 'OroUIBundle::macros.html.twig' as UI %}
 
 {% set gridName = 'acme_task_grid' %}
+
+{% block navButtons %}
+    {{ UI.addButton({
+        'path' : path('acme_task_create'),
+        'entity_label': 'acme.task.entity_label'|trans
+    }) }}
+{% endblock %}
