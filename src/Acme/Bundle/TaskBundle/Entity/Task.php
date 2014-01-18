@@ -5,6 +5,8 @@ namespace Acme\Bundle\TaskBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
+use JMS\Serializer\Annotation as JMS;
+
 use OroCRM\Bundle\ContactBundle\Entity\Contact;
 
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
@@ -47,6 +49,7 @@ class Task extends ExtendTask
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Type("integer")
      */
     protected $id;
 
@@ -55,6 +58,7 @@ class Task extends ExtendTask
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Oro\Versioned
+     * @JMS\Type("string")
      * @ConfigField(
      *  defaultValues={
      *      "dataaudit"={"auditable"=true}
@@ -73,6 +77,7 @@ class Task extends ExtendTask
      *      "dataaudit"={"auditable"=true}
      *  }
      * )
+     * @JMS\Type("string")
      */
     protected $description;
 
@@ -86,6 +91,8 @@ class Task extends ExtendTask
      *      inverseJoinColumns={@ORM\JoinColumn(name="contact_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      * @Oro\Versioned
+     * @JMS\Type("integer")
+     * @JMS\Accessor(getter="getRelatedContactId")
      * @ConfigField(
      *  defaultValues={
      *      "dataaudit"={"auditable"=true}
@@ -100,6 +107,8 @@ class Task extends ExtendTask
      * @ORM\ManyToOne(targetEntity="Acme\Bundle\TaskBundle\Entity\TaskStatus")
      * @ORM\JoinColumn(name="status_name", referencedColumnName="name", onDelete="SET NULL")
      * @Oro\Versioned("getLabel")
+     * @JMS\Type("string")
+     * @JMS\Accessor(getter="getStatusName")
      * @ConfigField(
      *  defaultValues={
      *      "dataaudit"={"auditable"=true}
@@ -114,6 +123,8 @@ class Task extends ExtendTask
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", onDelete="SET NULL")
      * @Oro\Versioned("getUsername")
+     * @JMS\Type("integer")
+     * @JMS\Accessor(getter="getAssigneeId")
      * @ConfigField(
      *  defaultValues={
      *      "dataaudit"={"auditable"=true}
@@ -128,6 +139,8 @@ class Task extends ExtendTask
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="SET NULL")
      * @Oro\Versioned("getUsername")
+     * @JMS\Type("integer")
+     * @JMS\Accessor(getter="getOwnerId")
      * @ConfigField(
      *  defaultValues={
      *      "dataaudit"={"auditable"=true}
@@ -140,6 +153,8 @@ class Task extends ExtendTask
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime")
+     * @JMS\Type("DateTime")
+     * )
      */
     protected $createdAt;
 
@@ -147,6 +162,7 @@ class Task extends ExtendTask
      * @var \DateTime $updated
      *
      * @ORM\Column(type="datetime", nullable=true)
+     * @JMS\Type("DateTime")
      */
     protected $updatedAt;
 

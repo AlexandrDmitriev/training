@@ -11,6 +11,16 @@
             'entity_label': 'acme.task.entity_label'|trans
         }) }}
     {% endif %}
+    {% if resource_granted('DELETE', entity) %}
+        {{ UI.deleteButton({
+            'dataUrl': path('acme_api_delete_task', {'id': entity.id}),
+            'dataRedirect': path('acme_task_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-user',
+            'dataId': entity.id,
+            'entity_label': 'acme.task.entity_label'|trans
+        }) }}
+    {% endif %}
 {% endblock navButtons %}
 
 {% block pageHeader %}
@@ -58,7 +68,6 @@
     {{ parent() }}
 {% endblock content_data %}
 
-
 {% macro renderUser(entity) %}
     {% if entity %}
         {{ entity|oro_format_name }} -
@@ -79,4 +88,3 @@
         {%- endif -%}
     {% endif %}
 {% endmacro %}
-
