@@ -19,6 +19,8 @@ class AcmeTaskExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->prependExtensionConfig('acme_task', $config);
+
         $loader->load('services.yml');
     }
 }

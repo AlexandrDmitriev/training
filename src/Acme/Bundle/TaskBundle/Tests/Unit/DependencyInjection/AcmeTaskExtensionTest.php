@@ -40,6 +40,7 @@ class AcmeTaskExtensionTest extends \PHPUnit_Framework_TestCase
             'acme_task.entity.class' => array('acme_task.entity.class'),
             'acme_task.form.type.task.class' => array('acme_task.form.type.task.class'),
             'acme_task.form.type.task_api.class' => array('acme_task.form.type.task_api.class'),
+            'acme_task.statistics.class' => array('acme_task.statistics.class'),
         );
     }
 
@@ -80,6 +81,12 @@ class AcmeTaskExtensionTest extends \PHPUnit_Framework_TestCase
                         array('alias' => 'acme_task_api')
                     )
                 )
+            ),
+            'acme_task.statistics' => array(
+                'service' => 'acme_task.statistics',
+                'class' => '%acme_task.statistics.class%',
+                'arguments' => array(new Reference('doctrine.orm.entity_manager')),
+                'tags' => array()
             )
         );
     }
