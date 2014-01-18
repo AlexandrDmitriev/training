@@ -1,5 +1,6 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
 
 {% oro_title_set({params : {"%entity.title%": entity.title }}) %}
 
@@ -34,6 +35,9 @@
                 {{ UI.renderProperty('acme.task.owner.label'|trans, _self.renderUser(entity.owner)) }}
                 {{ UI.renderProperty('acme.task.created_at.label'|trans, entity.createdAt|oro_format_datetime) }}
                 {{ UI.renderProperty('acme.task.updated_at.label'|trans, entity.updatedAt|oro_format_datetime) }}
+
+                {# This is required to show extended fields #}
+                {{ entityConfig.renderDynamicFields(entity) }}
             </div>
         </div>
     {%- endset -%}

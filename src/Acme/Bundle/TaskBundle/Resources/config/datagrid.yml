@@ -1,5 +1,6 @@
 datagrid:
     acme_task_grid:
+        extended_entity_name: %acme_task.entity.class%
         source:
             type: orm
             query:
