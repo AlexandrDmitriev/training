@@ -117,3 +117,12 @@ datagrid:
                 link: delete_link
                 icon: trash
                 acl_resource: acme_task_delete
+
+    # Tasks assigned to user
+    acme_task_assigned_tasks_grid:
+        extend: acme_task_grid
+        source:
+            query:
+                where:
+                    and:
+                        - task.assignee = :assigneeId
